@@ -1,7 +1,9 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  layout: {},
+  layout: {
+    headerRender: false
+  },
   nodeModulesTransform: {
     type: 'none',
   },
@@ -9,9 +11,22 @@ export default defineConfig({
     { exact: true, path: '/', redirect: '/main' },
     { path: '/main', name: 'main', icon: 'HomeOutlined', component: '@/pages/index' },
     { path: '/dva', icon: 'Html5Outlined', name: 'dva', microApp: 'dva' },
-    { path: '/umi', icon: 'GithubOutlined', name: 'umi', microApp: 'umi' },
+    { path: '/umi', microApp: 'umi' },
     { path: '/vue3', microApp: 'vue3' },
     { path: '/vue2', microApp: 'vue2' },
+    {
+      name: 'umi', icon: 'GithubOutlined', routes: [
+        {
+          path: '/umi/page1', exact: true, name: 'umi-page1',
+        },
+        {
+          path: '/umi/page2', exact: true, name: 'umi-page2',
+        },
+        {
+          path: '/umi/prisonerlist', exact: true, name: 'umi-prisonerlist',
+        },
+      ]
+    },
     {
       name: 'vue3', icon: 'FacebookOutlined', routes: [
         {
@@ -32,6 +47,8 @@ export default defineConfig({
         },
       ]
     },
+
+
 
 
     // { path: '/', name: 'main', icon: 'HomeOutlined', component: '@/pages/index' },

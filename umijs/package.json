@@ -21,7 +21,9 @@
     ]
   },
   "dependencies": {
-    "@ant-design/pro-layout": "^6.5.0",
+    "@ant-design/pro-descriptions": "^1.6.3",
+    "@ant-design/pro-layout": "^6.14.5",
+    "@ant-design/pro-table": "^2.30.3",
     "@umijs/preset-react": "1.x",
     "umi": "^3.3.9"
   },
