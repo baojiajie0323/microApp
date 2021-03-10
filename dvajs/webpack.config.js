@@ -22,7 +22,7 @@ export default function (webpackConfig) {
         },
     }
 
-    console.log(webpackConfig,newWebpackConfig.devServer);
+    // console.log(webpackConfig,newWebpackConfig.devServer);
     // alert(1)
     return newWebpackConfig;
 }
