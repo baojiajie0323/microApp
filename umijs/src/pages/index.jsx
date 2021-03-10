@@ -1,24 +1,35 @@
 import styles from './index.less';
+import React from 'react';
 import { Route, Switch, Link } from 'umi';
-import ProLayout from '@ant-design/pro-layout';
+import ProLayout, { getMenuData } from '@ant-design/pro-layout';
+import * as Icon from '@ant-design/icons';
 
 export default function IndexPage(props) {
+  console.log('props', props);
+  var settings = {
+    navTheme: 'dark',
+    // 拂晓蓝
+    primaryColor: '#ff90ff',
+    layout: 'side',
+    contentWidth: 'Fluid',
+    fixedHeader: false,
+    fixSiderbar: true,
+    colorWeak: false,
+    title: 'umijs',
+    pwa: false,
+    iconfontUrl: '',
+  }
+  const menuDataRender = (menuList) =>
+    menuList.map((item) => {
+      const localItem = {
+        ...item,
+        children: item.children ? menuDataRender(item.children) : undefined,
+      };
+      return localItem;
+    });
   return (
     <ProLayout
       {...props}
-      // route={[
-      //   {
-      //     path: '/',
-      //     icon: 'AccountBookOutlined',
-      //     name: '主页',
-      //     component: '@/pages/index',
-      //     routes: [
-      //       { path: '/page1', name: '路由1', icon: 'AccountBookOutlined', component: '@/pages/page1' },
-      //       { path: '/page2', name: '路由2', icon: 'AccountBookOutlined', component: '@/pages/page2' },
-      //       { path: '/prisonerlist', name: '在押人员', icon: 'AccountBookOutlined', component: '@/pages/PrisonerList' },
-      //     ]
-      //   },
-      // ]}
       breadcrumbRender={(routers = []) => [
         {
           path: '/',
@@ -26,26 +37,30 @@ export default function IndexPage(props) {
         },
         ...routers,
       ]}
-      settings={{
-        navTheme: 'dark',
-        // 拂晓蓝
-        primaryColor: '#1890ff',
-        layout: 'side',
-        contentWidth: 'Fluid',
-        fixedHeader: false,
-        fixSiderbar: true,
-        colorWeak: false,
-        title: 'zzba管理平台',
-        pwa: false,
-        iconfontUrl: '',
+      menuDataRender={menuDataRender}
+      menuItemRender={(menuItemProps, defaultDom) => {
+        console.log(menuItemProps, defaultDom, 'menuItemRender');
+        if (menuItemProps.isUrl || !menuItemProps.path) {
+          return defaultDom;
+        }
+
+        return <Link to={menuItemProps.path}>
+          {
+            React.createElement(
+              Icon[menuItemProps.icon]
+            )
+          }
+          {menuItemProps.name}
+        </Link>;
       }}
+      {...settings}
+      // settings={{ ...settings }}
       pure={window.__POWERED_BY_QIANKUN__}
     >
-
-      <h1 className={styles.title}>i am umi</h1>
+      {/* <h1 className={styles.title}>i am umi</h1>
       <Link to="/page1">page1</Link>
       <Link to="/page2">page2</Link>
-      <Link to="/prisonerlist">prisonerlist</Link>
+      <Link to="/prisonerlist">prisonerlist</Link> */}
       {props.children}
     </ProLayout>
   );

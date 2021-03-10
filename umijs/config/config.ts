@@ -11,8 +11,9 @@ export default defineConfig({
             name: '主页',
             component: '@/pages/index',
             routes: [
-                { path: '/page1', name: '路由1', icon: 'AccountBookOutlined', component: '@/pages/page1' },
-                { path: '/page2', name: '路由2', icon: 'AccountBookOutlined', component: '@/pages/page2' },
+                { path: '/', redirect: '/page1' },
+                { path: '/page1', name: '路由1', icon: 'AimOutlined', component: '@/pages/page1' },
+                { path: '/page2', name: '路由2', icon: 'BugOutlined', component: '@/pages/page2' },
                 { path: '/prisonerlist', name: '在押人员', icon: 'AccountBookOutlined', component: '@/pages/PrisonerList' },
             ]
         },
@@ -21,6 +22,7 @@ export default defineConfig({
     qiankun: {
         slave: {},
     },
+    // layout:{}
     // layout: {
     //     // menuRender: !window.__POWERED_BY_QIANKUN__,
     //     // headerRender: !window.__POWERED_BY_QIANKUN__,
